@@ -1,0 +1,167 @@
+@import "../style/variable";
+@import "../style/mixins";
+
+.login-container {
+  display: flex;
+  height: 100vh;
+
+  /* Left side */
+  .login-left {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: $color-bg;
+
+    .logo {
+      position: absolute;
+      top: 8%;
+      left: 5%;
+      width: 150px;
+    }
+
+    .illustration-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .illustration {
+      margin-top: 5rem;
+      max-width: 85%;
+      width: 37.5rem;
+    }
+  }
+
+  /* Right side */
+  .login-right {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 7rem;
+    background: #fff;
+
+    .logo-mobile {
+      display: none;
+      margin-bottom: 2rem;
+      width: 120px;
+    }
+
+    .welcome {
+      font-size: 40px;
+      font-weight: 700;
+      color: #213f7d;
+    }
+
+    .subtitle {
+      font-size: 20px;
+      margin-bottom: 2rem;
+      color: #545f7d;
+    }
+
+    /* Login form */
+    .login-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+
+      /* Floating input groups */
+      .input-group {
+        position: relative;
+        margin-bottom: .50rem;
+        width: 447px; // Figma width
+
+        input {
+          width: 100%;
+          padding: 1rem 0.2rem; // default padding, override for password
+          font-size: 1rem;
+          border: 1px solid #ccc;
+          border-radius: 5px;
+          outline: none;
+          transition: border-color 0.3s;
+
+          &:focus {
+            border-color: $color-accent;
+          }
+
+          &:focus + label,
+          &:not(:placeholder-shown) + label {
+            top: -0.6rem;
+            left: 0.75rem;
+            font-size: 0.75rem;
+            color: $color-accent;
+            background: white;
+            padding: 0 0.25rem;
+          }
+        }
+
+        label {
+          position: absolute;
+          left: 0.75rem;
+          top: 1rem;
+          color: #999;
+          font-size: 1rem;
+          pointer-events: none;
+          transition: 0.3s ease all;
+        }
+
+        /* Password input */
+        &.password-group {
+          input {
+            padding: 1rem 3.5rem 1rem 0.75rem; // extra right padding for toggle
+          }
+
+          .toggle-password {
+            position: absolute;
+            right: 0.75rem;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            font-size: 0.875rem;
+            color: $color-accent;
+            user-select: none;
+          }
+        }
+      }
+
+      .forgot-password {
+        font-size: 12px;
+        color: $color-accent;
+        text-align: left;
+        text-transform: uppercase;
+      }
+
+      .btn-primary {
+        background: $color-accent;
+        border: none;
+        color: white;
+        font-weight: 600;
+        padding: 1rem;
+        border-radius: 8px;
+        cursor: pointer;
+        text-transform: uppercase;
+        width: 447px; // Figma width
+      }
+    }
+  }
+
+  /* Mobile responsiveness */
+  @media (max-width: 768px) {
+    flex-direction: column;
+
+    .login-left {
+      display: none;
+    }
+
+    .login-right {
+      padding: 2rem;
+
+      .logo-mobile {
+        display: block;
+      }
+    }
+  }
+}

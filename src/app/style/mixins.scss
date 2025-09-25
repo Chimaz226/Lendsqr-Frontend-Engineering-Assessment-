@@ -1,0 +1,26 @@
+// Apply typography maps
+@mixin text-style($style) {
+  font-family: map-get($style, family);
+  font-weight: map-get($style, weight);
+  font-size: map-get($style, size);
+  line-height: map-get($style, lh);
+  letter-spacing: map-get($style, ls);
+  color: map-get($style, color);
+
+  // optional extras
+  @if map-has-key($style, tt) {
+    text-transform: map-get($style, tt);
+  }
+  @if map-has-key($style, align) {
+    text-align: map-get($style, align);
+  }
+}
+
+// Flexbox helper
+@mixin flex-center($direction: row, $gap: 0) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: center;
+  align-items: center;
+  gap: $gap;
+}

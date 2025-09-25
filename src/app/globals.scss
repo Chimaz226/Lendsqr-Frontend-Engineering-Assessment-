@@ -1,0 +1,27 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+@import "./style/variable";
+@import "./style/mixins";
+// ✅ import variables before usage
+// src/app/globals.scss
+
+
+
+html,
+body {
+  font-family: $font-avenir;
+  color: $color-text-dark;
+  margin: 0;
+  padding: 0;
+
+}
+
+
+
+/* Imports */
+@import "./style/variable";
+@import "./style/mixins";

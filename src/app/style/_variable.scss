@@ -1,0 +1,118 @@
+// 🎨 Colors
+$color-primary: #213F7D;
+$color-accent: #39CDCC;
+$color-danger: #E4033B;
+$color-text-dark: #545F7D;
+$color-bg: #F9FAFB;
+
+// 🖋 Fonts
+$font-avenir: "Avenir Next", sans-serif;
+$font-work: "Work Sans", sans-serif;
+
+
+// Typography scales
+$font-heading-xl: (
+  family: $font-avenir,
+  weight: 700,
+  size: 40px,
+  lh: 100%,
+  ls: -4%,
+  color: $color-primary
+);
+
+$font-heading-md: (
+  family: $font-work,
+  weight: 600,
+  size: 24px,
+  lh: 100%,
+  ls: 0,
+  tt: uppercase,
+  color: $color-primary
+);
+
+$font-heading-sm: (
+  family: $font-avenir,
+  weight: 400,
+  size: 20px,
+  lh: 100%,
+  ls: 0,
+  color: $color-primary
+);
+
+$font-body: (
+  family: $font-work,
+  weight: 400,
+  size: 16px,
+  lh: 100%,
+  ls: 0,
+  color: $color-primary
+);
+
+$font-label-accent: (
+  family: $font-work,
+  weight: 600,
+  size: 14px,
+  lh: 100%,
+  ls: 10%,
+  tt: uppercase,
+  align: center,
+  color: $color-accent
+);
+
+$font-label-danger: (
+  family: $font-work,
+  weight: 600,
+  size: 14px,
+  lh: 100%,
+  ls: 10%,
+  tt: uppercase,
+  align: center,
+  color: $color-danger
+);
+
+$font-label-muted: (
+  family: $font-work,
+  weight: 500,
+  size: 14px,
+  lh: 100%,
+  ls: 0,
+  tt: uppercase,
+  color: $color-text-dark
+);
+
+$font-label-sm: (
+  family: $font-work,
+  weight: 600,
+  size: 12px,
+  lh: 100%,
+  ls: 0,
+  tt: uppercase,
+  color: $color-text-dark
+);
+
+$font-label-xs: (
+  family: $font-work,
+  weight: 400,
+  size: 12px,
+  lh: 100%,
+  ls: 0,
+  tt: uppercase,
+  color: $color-text-dark
+);
+
+// 📏 Spacing
+$spacing-xs: 4px;
+$spacing-sm: 8px;
+$spacing-md: 16px;
+$spacing-lg: 24px;
+$spacing-xl: 40px;
+
+// 🔲 Radius
+$radius-sm: 4px;
+$radius-md: 8px;
+$radius-lg: 16px;
+
+// 📱 Breakpoints
+$breakpoint-mobile: 480px;
+$breakpoint-tablet: 768px;
+$breakpoint-desktop: 1200px;

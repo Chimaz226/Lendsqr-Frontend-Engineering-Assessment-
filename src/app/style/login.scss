@@ -1,11 +1,19 @@
 @import "../style/variable";
 @import "../style/mixins";
 
+/* If $color-accent is defined in your variable file, we'll use it.
+   Otherwise ensure $color-accent is defined there. */
+:root {
+  --input-bg: #ffffff;
+}
+
+/* subtle focus glow */
+$focus-glow: rgba(57, 205, 204, 0.12);
+
 .login-container {
   display: flex;
   height: 100vh;
 
-  /* Left side */
   .login-left {
     flex: 1;
     display: flex;
@@ -19,6 +27,7 @@
       top: 8%;
       left: 5%;
       width: 150px;
+      cursor: default;
     }
 
     .illustration-container {
@@ -35,7 +44,6 @@
     }
   }
 
-  /* Right side */
   .login-right {
     flex: 1;
     display: flex;
@@ -57,61 +65,97 @@
     }
 
     .subtitle {
+      font-family: "Avenir Next", sans-serif;
       font-size: 20px;
       margin-bottom: 2rem;
+      margin-top: 1rem;
+      font-weight: 400;
       color: #545f7d;
     }
 
-    /* Login form */
     .login-form {
       display: flex;
       flex-direction: column;
       gap: 1rem;
+      align-items: flex-start;
 
-      /* Floating input groups */
+      /* container keeps Figma width on desktop and is responsive */
+      width: 100%;
+      max-width: 447px;
+
       .input-group {
         position: relative;
-        margin-bottom: .50rem;
-        width: 447px; // Figma width
+        margin-bottom: 0.5rem;
+        width: 100%;
+        max-width: 447px;
+        overflow: visible;
 
         input {
           width: 100%;
-          padding: 1rem 0.2rem; // default padding, override for password
+          padding: 1rem 0.75rem;
           font-size: 1rem;
-          border: 1px solid #ccc;
+          border: 2px solid #545f7d26; /* neutral */
           border-radius: 5px;
           outline: none;
-          transition: border-color 0.3s;
-
-          &:focus {
-            border-color: $color-accent;
-          }
-
-          &:focus + label,
-          &:not(:placeholder-shown) + label {
-            top: -0.6rem;
-            left: 0.75rem;
-            font-size: 0.75rem;
-            color: $color-accent;
-            background: white;
-            padding: 0 0.25rem;
-          }
+          transition: border-color 0.18s ease, box-shadow 0.18s ease, transform 0.08s;
+          background: var(--input-bg);
+          position: relative;
+          z-index: 1;
+          box-sizing: border-box;
         }
 
+        /* active border and glow when focused or filled */
+        input:focus,
+        input:not(:placeholder-shown) {
+          border-color: $color-accent;
+          box-shadow: 0 0 0 6px $focus-glow;
+        }
+
+        /* label */
         label {
           position: absolute;
           left: 0.75rem;
           top: 1rem;
-          color: #999;
-          font-size: 1rem;
+          font-size: 14px;
+          color: #545f7d;
           pointer-events: none;
-          transition: 0.3s ease all;
+          transition: transform 0.18s ease, font-size 0.18s ease, color 0.18s ease;
+          line-height: 1;
+          z-index: 5; /* above input */
+          background: var(--input-bg); /* plain fill to cover border */
+          padding: 0 0.45rem;
+          display: inline-block;
+          transform-origin: left top;
         }
 
-        /* Password input */
+        label::before {
+          content: "";
+          position: absolute;
+          left: 0;
+          top: 50%;
+          transform: translateY(-50%);
+          width: 100%;
+          height: calc(1em + 0.45rem);
+          background: var(--input-bg);
+          z-index: -1; /* behind label text, but still inside label stacking */
+        }
+
+        /* floated label state */
+        input:focus + label,
+        input:not(:placeholder-shown) + label {
+          transform: translateY(-1.25rem) scale(0.86);
+          font-size: 12px;
+          color: $color-accent;
+        }
+
+        /* show a subtle press effect on input click */
+        input:active {
+          transform: translateY(0.5px);
+        }
+
         &.password-group {
           input {
-            padding: 1rem 3.5rem 1rem 0.75rem; // extra right padding for toggle
+            padding: 1rem 3.5rem 1rem 0.75rem;
           }
 
           .toggle-password {
@@ -120,21 +164,48 @@
             top: 50%;
             transform: translateY(-50%);
             cursor: pointer;
-            font-size: 0.875rem;
+            font-size: 12px;
             color: $color-accent;
             user-select: none;
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            z-index: 6;
+            background: transparent;
+            border: none;
+            padding: 0;
+            transition: color 0.12s ease, transform 0.12s ease;
+          }
+
+          .toggle-password:hover {
+            color: darken($color-accent, 8%); /* if your Sass supports darken() */
+            transform: translateY(-50%) scale(1.02);
           }
         }
       }
 
+      /* forgot-password hover */
       .forgot-password {
         font-size: 12px;
         color: $color-accent;
         text-align: left;
         text-transform: uppercase;
+        text-decoration: none;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        transition: color 0.12s ease, text-decoration 0.12s ease;
       }
 
+      .forgot-password:hover,
+      .forgot-password:focus {
+        color: darken($color-accent, 6%); /* subtle darken */
+        text-decoration: underline;
+      }
+
+      /* Primary button */
       .btn-primary {
+        width: 100%;
+        max-width: 447px;
         background: $color-accent;
         border: none;
         color: white;
@@ -143,13 +214,34 @@
         border-radius: 8px;
         cursor: pointer;
         text-transform: uppercase;
-        width: 447px; // Figma width
+        box-sizing: border-box;
+        transition: transform 0.12s ease, filter 0.12s ease, box-shadow 0.12s ease;
+      }
+
+      /* hover & active states for primary button */
+      .btn-primary:hover {
+        /* slightly brighter visually — using filter for safe cross-compatibility */
+        filter: brightness(0.95);
+        transform: translateY(-1px);
+        box-shadow: 0 6px 18px rgba(57,205,204,0.12);
+      }
+
+      .btn-primary:active {
+        transform: translateY(0); /* press effect */
+        filter: brightness(0.92);
+      }
+
+      /* focus-visible accessibility ring */
+      .btn-primary:focus-visible,
+      input:focus-visible {
+        outline: 3px solid rgba(57,205,204,0.18);
+        outline-offset: 3px;
       }
     }
   }
 
-  /* Mobile responsiveness */
-  @media (max-width: 768px) {
+  /* responsive */
+  @media (max-width: 968px) {
     flex-direction: column;
 
     .login-left {
@@ -159,9 +251,52 @@
     .login-right {
       padding: 2rem;
 
+      .login-right-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+      }
+
       .logo-mobile {
         display: block;
+      }
+
+      .welcome {
+        font-size: 28px;
+      }
+
+      .subtitle {
+        font-size: 16px;
+        text-align: center;
+      }
+
+      /* On mobile ensure button + inputs are full width */
+      .login-form {
+        width: 100%;
+        padding: 0 1rem;
+
+        .input-group,
+        .btn-primary {
+          max-width: 100%;
+        }
+      }
+    }
+  }
+
+  @media (max-width: 480px) {
+    .login-right {
+      padding: 1.5rem;
+
+      .btn-primary {
+        font-size: 14px;
+        padding: 0.8rem;
       }
     }
   }
 }
+
+/* Fallback if darken() is not available in your Sass environment:
+   Replace darken($color-accent, X%) lines with a manual color or remove them.
+*/

@@ -1,13 +1,14 @@
 /* Reset */
+@use "./style/variable" as *;
+@use "./style/mixins" as *;
+
+
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
-@import "./style/variable";
-@import "./style/mixins";
-// ✅ import variables before usage
-// src/app/globals.scss
 
 
 
@@ -22,6 +23,3 @@ body {
 
 
 
-/* Imports */
-@import "./style/variable";
-@import "./style/mixins";

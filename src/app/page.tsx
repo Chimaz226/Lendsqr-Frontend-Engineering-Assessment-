@@ -35,7 +35,8 @@ export default function LoginPage() {
 
       <div className="login-right">
         <Image src={logo} alt="Lendsqr Logo" className="logo-mobile" />
-        <h1 className="welcome">Welcome!</h1>
+        <div className="login-right-container">
+           <h1 className="welcome">Welcome!</h1>
         <p className="subtitle">Enter details to login.</p>
 
         <form onSubmit={handleLogin} className="login-form">
@@ -75,6 +76,7 @@ export default function LoginPage() {
             Log In
           </button>
         </form>
+       </div>
       </div>
     </main>
   );
